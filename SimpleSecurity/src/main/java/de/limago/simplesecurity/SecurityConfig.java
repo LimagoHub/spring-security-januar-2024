@@ -17,6 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -29,7 +30,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-	private final UserRepository repo;
+	private final UserRepository userRepository;
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -47,7 +48,7 @@ public class SecurityConfig {
 		return http.build();
 	}
 
-	@Bean
+	/*@Bean
 	public UserDetailsService userDetailsService() {
 		UserDetails user =
 				User.builder() //.withDefaultPasswordEncoder()
@@ -57,7 +58,13 @@ public class SecurityConfig {
 						.build();
 
 		return new InMemoryUserDetailsManager(user);
-	}
+	}*/
+			@Bean
+
+		public UserDetailsService userDetailsService() {
+			return username -> userRepository.findById(username)
+					.orElseThrow(() -> new UsernameNotFoundException(username));
+		}
 
 	@Bean
 	public PasswordEncoder getPasswordEncoder() {
