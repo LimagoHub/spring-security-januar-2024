@@ -50,14 +50,17 @@ public class SecurityConfig {
 	@Bean
 	public UserDetailsService userDetailsService() {
 		UserDetails user =
-				User.withDefaultPasswordEncoder()
+				User.builder() //.withDefaultPasswordEncoder()
 						.username("user")
-						.password("password")
+						.password("$2a$10$d/ndLjjrHMX5R97HQAcfCe54k94LMOxLGMiTRy2mKElY/OaGwW19q")
 						.roles("USER")
 						.build();
 
 		return new InMemoryUserDetailsManager(user);
 	}
 
-
+	@Bean
+	public PasswordEncoder getPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 }
