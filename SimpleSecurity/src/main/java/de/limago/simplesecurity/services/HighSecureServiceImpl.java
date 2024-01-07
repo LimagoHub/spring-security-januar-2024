@@ -17,7 +17,7 @@ public class HighSecureServiceImpl implements HighSecureService {
 	
 	@Override
 	
-	//@Secured({"ROLE_RUN_AS_ADMIN"})
+	@Secured({"ADMIN","ROLE_USER"})
 	public void secureServicesMethodFoo() {
 		logger.warn("secureServicesMethodFoo called");
 		System.out.println("OK");
@@ -28,7 +28,7 @@ public class HighSecureServiceImpl implements HighSecureService {
 	}
 
 	@Override
-	//@Secured("ROLE_USER")
+	@Secured("ROLE_USER")
 	public void secureServicesMethodBar() {
 		logger.warn("secureServicesMethodBar called");
 	}

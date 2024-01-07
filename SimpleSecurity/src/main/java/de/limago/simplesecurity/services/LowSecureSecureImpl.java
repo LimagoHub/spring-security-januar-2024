@@ -1,14 +1,15 @@
 package de.limago.simplesecurity.services;
 
+
+
+import de.limago.simplesecurity.aspects.annotations.RunAsRole;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.security.RunAs;
-
 @Service
-//@RunAs("RUN_AS_ADMIN")
+
 public class LowSecureSecureImpl implements LowSecureService {
 	
 	
@@ -20,8 +21,9 @@ public class LowSecureSecureImpl implements LowSecureService {
 	}
 	
 	@Override
-	
-	//@Secured("ROLE_USER")
+
+	@Secured("ROLE_GUEST")
+	@RunAsRole("ADMIN")
 	public void lowSecureSeviceFoo() {
 		System.out.println("OK");
 		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
