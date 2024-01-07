@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <a href="secure/high">high</a><br>
+    <a href="secure/low">low</a><br>
+    <a href="secure/safe">safe</a>
+    <a href="unsecure/notsafe">notsafe</a><br>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</body>
+</html>
