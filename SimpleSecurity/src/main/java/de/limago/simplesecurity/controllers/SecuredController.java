@@ -21,13 +21,15 @@ public class SecuredController {
 	}
 
 	@GetMapping(path = "/low")
-	public void foo() {
+	public String foo() {
 		lowSecureService.lowSecureSeviceFoo();
+		return "OK low";
 	}
 
 	@GetMapping(path = "/high")
-	public void bar() {
+	public String bar() {
 		highSecureService.secureServicesMethodFoo();
+		return "OK High";
 	}
 	
 	
